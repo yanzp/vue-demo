@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import App from './App';
-
-let div = document.createElement('div');
-div.id = 'app';
-document.body.appendChild(div);
+import router from './router';
 
 new Vue({
     el: '#app',
+    router,
     render: h => h(App)
 })

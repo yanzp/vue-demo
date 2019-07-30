@@ -9,6 +9,7 @@ const webpackConfig = require('./webpack.base.conf.js');
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = merge(webpackConfig, {
     mode: 'development',
@@ -66,6 +67,7 @@ module.exports = merge(webpackConfig, {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new OpenBrowserPlugin()
     ]
 })
