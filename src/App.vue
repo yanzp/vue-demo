@@ -5,7 +5,9 @@
             :tabs="tabs" 
             :fn="onTab"
             ></Header>
-        <router-view></router-view>
+        <div class="content">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -15,10 +17,10 @@ export default {
     data() {
         return {
             tabs: [
-                { name: '首页', url: '/' }, 
+                { name: '首页', url: '/index' }, 
                 { name: '评价', url: '/comment' },
-                { name: '新闻', url: '/goods' }, 
-                { name: '关注', url: '/' }
+                { name: '评级', url: '/goods' }, 
+                { name: '关注', url: '/other' }
             ]
         }
     },

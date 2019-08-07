@@ -10,6 +10,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = merge(webpackConfig, {
     mode: 'development',
@@ -46,11 +47,14 @@ module.exports = merge(webpackConfig, {
                             ident: 'postcss',
                             sourceMap: true,
                             plugins: loader => [
-                                require('autoprefixer')({
-                                    browsers: [
-                                        "last 2 versions",
-                                        "> 1%"
-                                    ]
+                                autoprefixer({
+                                    overrideBrowserslist: [
+                                        "Android 4.1",
+                                        "iOS 7.1",
+                                        "Chrome > 31",
+                                        "ff > 31",
+                                        "ie >= 8"
+                                      ]
                                 })
                             ]
                         }

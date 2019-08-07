@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = merge(webpackConfig, {
     mode: 'production',
@@ -30,11 +31,14 @@ module.exports = merge(webpackConfig, {
                             ident: 'postcss',
                             sourceMap: true,
                             plugins: loader => [
-                                require('autoprefixer')({
-                                    browsers: [
-                                        "last 2 versions",
-                                        "> 1%"
-                                    ]
+                                autoprefixer({
+                                    overrideBrowserslist: [
+                                        "Android 4.1",
+                                        "iOS 7.1",
+                                        "Chrome > 31",
+                                        "ff > 31",
+                                        "ie >= 8"
+                                      ]
                                 })
                             ]
                         }

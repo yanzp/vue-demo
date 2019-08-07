@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-for="(item, index) in tabs" :key="index">
+    <div class="header">
+        <div class="nav" v-for="(item, index) in tabs" :key="index">
             <router-link :to="item.url">{{ item.name }}</router-link>
         </div>
         <div @click="fn">test</div>
