@@ -1,5 +1,11 @@
 <template>
     <div class="comment">
+        <div class="comment-area clearfix">
+            <h3>我要评论</h3>
+            <Star ref="star"></Star>
+            <textarea placeholder="我要评论..." v-model="textarea"></textarea>
+            <button class="btn blue-btn" @click="onComment">评论</button>
+        </div>
         <div class="tabs">
             <span v-for="(item, index) in tabs" 
                 :key="index" 
@@ -22,38 +28,48 @@
 
 <script>
 import Star from '@/components/Star';
-import axios from 'axios';
 import urlSet from '@/config/urlSet';
-// URLSearchParams未定义的问题，IE9不支持URLSearchParams
-// import qs from 'qs';
-// var params = {
-// 'param1':1,
-// 'param2':2
-// }
-// qs.stringify(params)
+import request from '@/config/axios';
 
 export default {
     data() {
         return {
             tabs: [ '全部', '有图', '点评' ],
             currentIndex: 0,
-            data: []
+            data: [],
+            textarea: null
         }
     },
     methods: {
         onActive: function(index) {
             this.currentIndex = index;
+        },
+        onComment: async function() {
+            var params = {
+                author: "author",
+                num: this.$refs.star.currentIndex,
+                content: this.textarea
+            }
+
+            try {
+                // var response = await axios.post(urlSet.submit, qs.stringify(params));
+                var response = await request(urlSet.submit, 'post', params);
+                console.log(response.data);
+            } catch (err) {
+                console.error(err)
+            }
         }
     },
-    created() {
+    async created() {
         var $this = this;
-        axios.get(urlSet.comment).then(function(response){
-            if (response.status == 200) {
-                $this.data = response.data.data;
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+
+        try {
+            // var response = await axios.get(urlSet.comment);
+            var response = await request(urlSet.comment, 'get');
+            $this.data = response.data;
+        } catch(err) {
+            console.error(err)
+        }   
     },
     components: {
         Star
@@ -64,3 +80,5 @@ export default {
 <style lang="less">
 
 </style>
+
+

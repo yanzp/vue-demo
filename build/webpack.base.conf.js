@@ -14,7 +14,7 @@ module.exports = {
     }, 
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'js/[name].js',
+        filename: 'js/[name].[hash].js',
         publicPath: './'
     },
     module: {
@@ -72,5 +72,24 @@ module.exports = {
         alias: {
           '@': path.resolve(__dirname,'../src')
         }
-    }
+    },
+    // 将 node_modules 中的所有内容放入名为 vendors~main.js 的文件中
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name(module) {
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                        return `npm.${packageName.replace('@', '')}`;
+                    }
+                }
+            },
+        },
+    },
 }
