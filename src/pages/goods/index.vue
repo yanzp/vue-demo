@@ -1,16 +1,20 @@
 <template>
-    <div class="star" @mouseout="onOut()">
-        <span class="iconfont icon-star"
-            :class="{'active': index <= currentIndex, 'is-hover': index <= hoverIndex}" 
-            v-for="(item, index) in step"
-            :key="index"
-            @click="onStar(index)"
-            @mouseover="onOver(index)">
-        </span>
+    <div class="goods">
+        <span>{{ count }}</span>
+        <div class="star" @mouseout="onOut()">
+            <span class="iconfont icon-star"
+                :class="{'active': index <= currentIndex, 'is-hover': index <= hoverIndex}" 
+                v-for="(item, index) in step"
+                :key="index"
+                @click="onStar(index)"
+                @mouseover="onOver(index)">
+            </span>
+        </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     data() {
         return {
@@ -18,6 +22,11 @@ export default {
             currentIndex: -1,
             hoverIndex: -1
         }
+    },
+    computed: {
+        ...mapState({
+            count: state => state.count
+        })
     },
     methods: {
         onStar: function(index) {

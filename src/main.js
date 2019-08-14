@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './store';
 import './fonts/iconfont.css';
 import './css/common.less';
 import 'babel-polyfill';
@@ -11,6 +12,7 @@ promise.polyfill()
 
 new Vue({
     el: '#app',
+    store,
     router,
     render: h => h(App)
 })

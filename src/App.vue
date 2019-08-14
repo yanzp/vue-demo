@@ -18,9 +18,9 @@ export default {
         return {
             tabs: [
                 { name: '首页', url: '/index' }, 
-                { name: '评价', url: '/comment' },
+                { name: 'axios', url: '/comment' },
                 { name: '评级', url: '/goods' }, 
-                { name: '关注', url: '/other' }
+                { name: 'vuex', url: '/other' }
             ]
         }
     },
