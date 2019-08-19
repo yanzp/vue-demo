@@ -9,8 +9,8 @@ const state = {
 }
 
 const actions = {
-    addComment({ commit, state }, text) {
-        commit('add', text)
+    addComment({ commit, state }, obj) {
+        commit('add', obj)
     },
     subComment({ commit, state }, index) {
         commit('sub', index)
@@ -18,8 +18,8 @@ const actions = {
 }
 
 const mutations = {
-    add(state, text) {
-        state.data.push(text);
+    add(state, obj) {
+        state.data.push(obj);
         state.count ++;
     },
     sub(state, index) {
