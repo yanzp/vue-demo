@@ -6,6 +6,7 @@
             <textarea placeholder="我要评论..." v-model="textarea"></textarea>
             <button class="btn blue-btn" @click="onComment">评论</button>
         </div>
+        
         <div class="tabs">
             <span v-for="(item, index) in tabs" 
                 :key="index" 
@@ -37,7 +38,7 @@ export default {
             tabs: [ '全部', '有图', '点评' ],
             currentIndex: 0,
             data: [],
-            textarea: null
+            textarea: null,
         }
     },
     methods: {
@@ -58,7 +59,8 @@ export default {
             } catch (err) {
                 console.error(err)
             }
-        }
+        },
+        
     },
     async created() {
         var $this = this;
@@ -72,7 +74,7 @@ export default {
         }   
     },
     components: {
-        Star
+        Star,
     }
 }
 </script>

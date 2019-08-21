@@ -18,6 +18,7 @@
                 <input type="checkbox" v-model="check" :value="index" />
                 <span>{{ item.text }}</span> 
                 <span>{{ item.val == 1? '收款':'转账' }}</span>
+                <Buttons iconName="icon-like" css="{'active':css}" :txt="txt" :click="buttonClick"></Buttons>
                 <button @click="subComment(index)">删除</button>
             </li>
         </ul>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import Buttons from '@/components/Buttons';
 import { mapState, mapActions } from 'vuex';
 export default {
     data() {
@@ -35,7 +37,9 @@ export default {
             options: [
                 { id: 1, name: '收款' },
                 { id: 2, name: '转账' }
-            ]
+            ],
+            txt: '赞',
+            iconName: 'icon-like',
         }
     },
     computed: {
@@ -70,11 +74,31 @@ export default {
             } else {
                 alert('您还未勾选')
             }        
+        },
+        buttonClick: function() {
+            if (this.txt == '赞') {
+                this.txt = '取消';
+                this.css = true;
+            } else {
+                this.txt = '赞';
+                this.css = false;
+            }
         }
+    },
+    components: {
+        Buttons
     }
 }
 </script>
 
 <style lang="less">
-.list {}
+.active {
+    .icon-like {
+        color: red;
+    }
+    span {
+        color: #999;
+    }
+}
+
 </style>
